@@ -1,0 +1,599 @@
+/* -------------------------
+   GLOBAL SETTINGS
+   - Base typography, background gradient and general colors
+   - Used across the whole page (body element)
+------------------------- */
+body {
+    font-family: 'Nunito',sans-serif;
+    background: #f0f4f8;
+    color: #333;
+    transition: all 0.3s ease;
+    /* background-image:url(../backgr1.avif);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat; */
+}
+
+h1, h3, h4, h5 {
+    font-weight: 600;
+}
+
+/* -------------------------
+   COUNTRY CARD STYLES
+   - Styles for the country result cards
+   - Applied to each card in #country-list rendered by app.js
+   - Elements: .country-card, .flag-img, inside text
+------------------------- */
+.country-card {
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    background: linear-gradient(145deg, #ffffff, #f1f3f6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.country-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.flag-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Card text content */
+.country-card h5 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.country-card p {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+/* -------------------------
+   BUTTONS
+   - Primary button look used in Search / Reset and pagination controls
+   - Overrides Bootstrap .btn-primary
+------------------------- */
+.btn-primary {
+    background-color: #0d6efd;   /* Bootstrap primary blue */
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;   /* Slightly darker blue */
+}
+
+
+/* -------------------------
+   LOADER
+   - Centered loader animation used when fetching data
+   - Element: #loader in index.html (toggled via showLoader/hideLoader)
+------------------------- */
+.loader-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(255,255,255,0.5);
+    z-index: 9998;
+}
+
+.loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border: 6px solid #ececec;
+    border-top: 6px solid #4b6cb7;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 9999;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* -------------------------
+   AUTOCOMPLETE
+   - Styling for the suggestions dropdown shown below #searchName
+   - Element: #suggestions (populated by showSuggestions() in app.js)
+------------------------- */
+#suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 6px 18px rgba(0,0,0,0.15);
+    max-height: 250px;
+    overflow-y: auto;
+    display: none;
+    z-index: 999999;
+}
+
+#suggestions .list-group-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+
+#suggestions .list-group-item:hover {
+    background: #f1f3f6;
+    color: #182848;
+    font-weight: 500;
+}
+
+/* Highlight matching text */
+#suggestions strong {
+    color: #4b6cb7;
+}
+
+/* Scrollbar styling */
+#suggestions::-webkit-scrollbar {
+    width: 6px;
+}
+#suggestions::-webkit-scrollbar-thumb {
+    background: rgba(75,108,183,0.4);
+    border-radius: 3px;
+}
+
+
+
+/* -------------------------
+   MODAL
+   - Country details modal styling
+   - Elements: #countryModal .modal-content and .modal-body images/text
+------------------------- */
+.modal-content {
+    border-radius: 15px;
+    background: #f9f9f9;
+    overflow: hidden;
+}
+
+.modal-body img {
+    border-radius: 10px;
+    max-height: 150px;
+}
+
+.modal-body p {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+/* -------------------------
+   INPUT FOCUS
+   - Focus states for inputs and selects used in the filter card
+   - Elements: input, select in the filter section
+------------------------- */
+input:focus, select:focus {
+    border-color: #4b6cb7;
+    box-shadow: 0 0 8px rgba(75,108,183,0.4);
+    outline: none;
+}
+
+/* -------------------------
+   RESPONSIVE
+   - Adjust flag image height for smaller viewports
+   - Works with the .flag-img used inside each .country-card
+------------------------- */
+@media (max-width: 768px) {
+    .flag-img {
+        height: 140px;
+    }
+}
+
+@media (max-width: 480px) {
+    .flag-img {
+        height: 120px;
+    }
+}
+
+/* -------------------------
+   LABEL SECTION
+   - Styling for labels and form controls inside the filter card
+   - Elements: .form-label, .form-control, .form-select
+------------------------- */
+.form-label {
+    font-size: 15px;
+    margin-bottom: 4px;
+    color: #333;
+    font-weight: bold;
+}
+
+.form-control, .form-select {
+    border-radius: 8px;
+    padding: 10px;
+}
+
+
+/* -------------------------
+   BUTTON SECTION
+   - Additional button sizing and hover effects shared by primary/secondary
+   - Elements: .btn-primary, .btn-secondary (Search, Reset, pagination)
+------------------------- */
+
+.btn-primary, .btn-secondary {
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(75,108,183,0.3);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(108,117,125,0.3);
+}
+
+
+/* -------------------------
+   COUNT OF COUNTRIES
+   - Styling for #countryCount text shown beside the "Countries List" heading
+------------------------- */
+#countryCount {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0a58ca;
+    margin-top: 10px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* =========================
+   REAL 3D SPHERICAL GLOBE
+========================= */
+
+/* Perfectly smooth circular rotation */ 
+.smooth-earth {
+     width: 55px;
+     height: 55px; 
+    vertical-align: middle;
+     margin: 0 6px;
+    animation: smoothSpin 6s linear infinite; 
+} 
+/* Keyframes for clean circular rotation */
+ @keyframes smoothSpin 
+ {
+from {
+     transform: rotate(0deg);
+     } 
+ to 
+   { 
+    transform: rotate(360deg); 
+   }
+ }
+
+
+/* -------------------------
+   INPUT FIELDS CSS
+   - Visual defaults and focus glow for input/select fields in the filter card
+   - Elements: input, select
+------------------------- */
+/* 🔥 Input fields default */
+input, select {
+    background: #f0f4ff;
+    border: 2px solid transparent;
+    padding: 10px 14px;
+    border-radius: 10px;
+    width: 100%;
+    transition: 0.3s;
+    outline: none;
+}
+
+/* 🌟 When user clicks/focuses — premium glow */
+input:focus, select:focus {
+    background: #ffffff;
+    border: 2px solid #4a90e2;
+    box-shadow: 0 0 8px rgba(74,144,226,0.4);
+}
+
+
+/*.card {
+    border: 1px solid #e7e9ee !important;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05) !important;
+}*/
+
+
+/* -------------------------
+   PAGINATION
+   - Styles for the pagination container and page buttons generated by app.js
+   - Element: #pagination (container) and .page-btn if you use custom buttons
+------------------------- */
+/* -------------------------
+   PAGINATION BUTTON HOVER (FIX)
+------------------------- */
+#pagination .btn {
+    background-color: #0d6efd;   /* Bootstrap primary blue */
+    border: none;
+    color: #ffffff;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#pagination .btn:hover {
+    background-color: #0b5ed7;   /* Slightly darker blue on hover */
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(13, 110, 253, 0.35);
+}
+
+#pagination .btn:disabled {
+    background-color: #9ec5fe;   /* Light blue disabled */
+    color: #ffffff;
+    opacity: 0.7;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+
+/* -------------------------
+      FOOTER
+   - Footer links and hover state
+   - Element: footer at bottom of index.html
+------------------------- */
+
+footer a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   INTRO VIDEO SECTION
+========================= */
+.hero-video {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: black;
+
+    
+}
+
+.hero-video-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+}
+
+.hero-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+}
+
+.hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-family: 'Open Sans', 'Segoe UI', sans-serif;
+    font-size: 18px;
+    max-width: 600px;
+    margin-bottom: 25px;
+}
+
+.hero-btn {
+    background: linear-gradient(135deg, #1e88e5, #0d47a1);
+    border: none;
+    padding: 12px 36px;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.hero-btn:hover {
+    background: linear-gradient(135deg, #42a5f5, #1565c0);
+    transform: translateY(-2px);
+}
+
+/* =========================
+   NAVBAR STYLES
+========================= */
+.custom-navbar {
+    width: 100%;
+    height: 64px;
+    background:whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-logo {
+    font-size: 26px;
+}
+
+.nav-title {
+    font-size: 20px;
+    font-weight: 800;
+    color:black;
+    letter-spacing: 1px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* =========================
+   NAVBAR ITEM HOVER EFFECT
+========================= */
+.nav-link {
+    color:black;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect ONLY on item */
+.nav-link:hover {
+    background-color:rgb(63, 169, 236); /* light overlay */
+    color:white;
+}
+
+
+/* =========================
+   THEME TOGGLE BUTTON
+========================= */
+.theme-toggle {
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    transition: transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+
+/* =========================
+   DARK THEME
+========================= */
+/* 1. Define the color palettes */
+:root {
+    /* Light Theme (Default) */
+    --bg-body: #f4f7f6;
+    --bg-card: #ffffff;
+    --text-main: #333333;
+    --text-muted: #666666;
+    --input-bg: #ffffff;
+    --border-color: #dddddd;
+    --accent-blue: #30475e;
+}
+
+body.dark-theme {
+    /* Dark Theme - Modern Deep Grey Palette */
+    --bg-body: #121212;      /* Deep background */
+    --bg-card: #1e1e1e;      /* Elevated surface (lighter than background) */
+    --text-main: #e0e0e0;    /* Soft white for readability */
+    --text-muted: #b0b0b0;
+    --input-bg: #2a2a2a;     /* Darker inputs */
+    --border-color: #333333;
+    --accent-blue: #4f8bc9;
+}
+
+/* 2. Apply variables to your elements */
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth fade effect */
+}
+
+body.dark-theme .card {
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Stronger shadow for dark mode */
+}
+
+body.dark-theme .form-control,
+body.dark-theme .form-select {
+    background-color: var(--input-bg);
+    color: var(--text-main);
+    border-color: var(--border-color);
+}
+
+/* Fix for placeholder text in dark mode */
+body.dark-theme .form-control::placeholder {
+    color: #777777;
+}
+
+body.dark-theme footer {
+    background-color: #0a0a0a !important;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-color);
+}
+
+/* =========================
+   FEEDBACK STAR RATING
+========================= */
+.star-rating {
+    font-size: 30px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.star-rating span {
+    margin: 0 5px;
+    transition: color 0.2s;
+}
+
+.star-rating span.active {
+    color: #ffc107;
+}
+
+
+/* =========================
+   SEARCH PLACEHOLDER CENTER
+========================= */
+.search-placeholder {
+    min-height: 200px;              /* controls vertical space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;        /* vertical center */
+    align-items: center;            /* horizontal center */
+    text-align: center;
+    opacity: 0.96;
+}
+.text-muted{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+.search-icon {
+    font-size: 64px;
+}
+
